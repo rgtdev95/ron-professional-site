@@ -1,15 +1,50 @@
+import { 
+  SiReact, 
+  SiTypescript, 
+  SiTailwindcss, 
+  SiNextdotjs, 
+  SiVuedotjs,
+  SiNodedotjs,
+  SiPython,
+  SiPostgresql,
+  SiMongodb,
+  SiGit,
+  SiDocker,
+  SiAmazon,
+  SiFigma,
+} from "react-icons/si";
+import { FaCode, FaServer } from "react-icons/fa";
+
 const skills = [
   {
     category: "Frontend",
-    items: ["React", "TypeScript", "Tailwind CSS", "Next.js", "Vue.js"],
+    items: [
+      { name: "React", icon: SiReact },
+      { name: "TypeScript", icon: SiTypescript },
+      { name: "Tailwind CSS", icon: SiTailwindcss },
+      { name: "Next.js", icon: SiNextdotjs },
+      { name: "Vue.js", icon: SiVuedotjs },
+    ],
   },
   {
     category: "Backend",
-    items: ["Node.js", "Python", "PostgreSQL", "MongoDB", "REST APIs"],
+    items: [
+      { name: "Node.js", icon: SiNodedotjs },
+      { name: "Python", icon: SiPython },
+      { name: "PostgreSQL", icon: SiPostgresql },
+      { name: "MongoDB", icon: SiMongodb },
+      { name: "REST APIs", icon: FaServer },
+    ],
   },
   {
     category: "Tools & Others",
-    items: ["Git", "Docker", "AWS", "Figma", "CI/CD"],
+    items: [
+      { name: "Git", icon: SiGit },
+      { name: "Docker", icon: SiDocker },
+      { name: "AWS", icon: SiAmazon },
+      { name: "Figma", icon: SiFigma },
+      { name: "CI/CD", icon: FaCode },
+    ],
   },
 ];
 
@@ -33,17 +68,21 @@ const Skills = () => {
               <h3 className="text-xl font-semibold mb-4 text-primary">
                 {skillGroup.category}
               </h3>
-              <ul className="space-y-2">
-                {skillGroup.items.map((skill, skillIndex) => (
-                  <li
-                    key={skillIndex}
-                    className="text-muted-foreground flex items-center gap-2"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-                    {skill}
-                  </li>
-                ))}
-              </ul>
+              <div className="flex flex-wrap gap-3">
+                {skillGroup.items.map((skill, skillIndex) => {
+                  const Icon = skill.icon;
+                  return (
+                    <div
+                      key={skillIndex}
+                      className="flex items-center gap-2 px-3 py-2 rounded-md bg-secondary/50 hover:bg-secondary transition-colors"
+                      title={skill.name}
+                    >
+                      <Icon className="w-5 h-5 text-primary" />
+                      <span className="text-sm text-foreground">{skill.name}</span>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           ))}
         </div>
