@@ -1,23 +1,9 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
-const testimonials = [
-  {
-    quote: "Alicia Smith is an outstanding developer. She understood our needs right away and delivered a website that exceeded expectations. Great communication, attention to detail, and top-notch skills. Highly recommended!",
-    highlightedWords: ["outstanding developer", "exceeded expectations"],
-    author: "Peter Norris",
-    role: "Founder at Acme Inc.",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Peter",
-  },
-  {
-    quote: "Alicia Smith is a fantastic developer. She understood our needs and delivered a website that exceeded expectations. Her communication and attention to detail are outstanding. I highly recommend her!",
-    highlightedWords: ["exceeded expectations", "outstanding"],
-    author: "Ann Helfer",
-    role: "Founder at Design Stars",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Ann",
-  },
-];
+import { useBlogs } from "@/contexts/BlogContext";
 
 const Testimonials = () => {
+  const { testimonials } = useBlogs();
+
   const highlightText = (text: string, wordsToHighlight: string[]) => {
     let result = text;
     const parts: { text: string; highlighted: boolean }[] = [];
