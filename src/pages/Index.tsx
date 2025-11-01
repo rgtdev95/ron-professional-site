@@ -7,6 +7,7 @@ import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import { Separator } from "@/components/ui/separator";
 
 const Index = () => {
   return (
@@ -17,6 +18,9 @@ const Index = () => {
       <About />
       <Skills />
       <Testimonials />
+      <div className="container mx-auto px-6">
+        <Separator className="opacity-50" />
+      </div>
       <FAQ />
       <Contact />
       <Footer />
