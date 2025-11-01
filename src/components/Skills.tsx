@@ -10,10 +10,9 @@ import {
   SiMongodb,
   SiGit,
   SiDocker,
-  SiAmazon,
   SiFigma,
 } from "react-icons/si";
-import { FaCode, FaServer } from "react-icons/fa";
+import { FaCode, FaServer, FaAws } from "react-icons/fa";
 
 const skills = [
   {
@@ -41,7 +40,7 @@ const skills = [
     items: [
       { name: "Git", icon: SiGit },
       { name: "Docker", icon: SiDocker },
-      { name: "AWS", icon: SiAmazon },
+      { name: "AWS", icon: FaAws },
       { name: "Figma", icon: SiFigma },
       { name: "CI/CD", icon: FaCode },
     ],
