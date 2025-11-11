@@ -1,4 +1,8 @@
 import { Button } from "@/components/ui/button";
+import about1 from "@/assets/about-1.jpg";
+import about2 from "@/assets/about-2.jpg";
+import about3 from "@/assets/about-3.jpg";
+import about4 from "@/assets/about-4.jpg";
 
 const About = () => {
   const scrollToSection = (id: string) => {
@@ -45,12 +49,28 @@ const About = () => {
           <div className="relative">
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-4">
-                <div className="h-32 bg-primary/10 rounded-lg" />
-                <div className="h-48 bg-primary/20 rounded-lg" />
+                <img 
+                  src={about1} 
+                  alt="Professional workspace" 
+                  className="h-32 w-full object-cover rounded-lg shadow-lg"
+                />
+                <img 
+                  src={about2} 
+                  alt="Modern office" 
+                  className="h-48 w-full object-cover rounded-lg shadow-lg"
+                />
               </div>
               <div className="space-y-4 pt-12">
-                <div className="h-48 bg-primary/20 rounded-lg" />
-                <div className="h-32 bg-primary/10 rounded-lg" />
+                <img 
+                  src={about3} 
+                  alt="Team collaboration" 
+                  className="h-48 w-full object-cover rounded-lg shadow-lg"
+                />
+                <img 
+                  src={about4} 
+                  alt="Developer at work" 
+                  className="h-32 w-full object-cover rounded-lg shadow-lg"
+                />
               </div>
             </div>
           </div>
