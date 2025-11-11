@@ -21,12 +21,7 @@ const About = () => {
             </div>
             <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p>
-                Hello! I'm a passionate professional who thrives on creating innovative 
-                solutions that tackle complex challenges.
-              </p>
-              <p>
-                My attention to detail allows me to enhance every interaction, ensuring 
-                it not only boosts productivity but also elevates user satisfaction.
+                I'm driven by curiosity and a love for clarity. Whether I'm solving a technical challenge or designing a workflow, I aim to create order, efficiency, and a sense of calm through my work.
               </p>
             </div>
             <div className="flex flex-wrap gap-4 pt-4">
