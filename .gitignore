@@ -7,18 +7,85 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
 node_modules
+jspm_packages/
+
+# Build outputs
 dist
 dist-ssr
+build/
+.next
+.nuxt
+.cache/
+.parcel-cache
+
+# Local env files
 *.local
+
+# Environment variables (IMPORTANT - contains sensitive data)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+server/.env*
+client/.env*
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+server/database/*.db
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage and test files
+coverage/
+*.lcov
+.nyc_output
+
+# Cache directories
+.npm
+.eslintcache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Optional files
+.node_repl_history
+*.tgz
+.yarn-integrity
+
+# Temporary folders
+tmp/
+temp/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
 .idea
-.DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# IDE files
+*.swp
+*.swo
+*~

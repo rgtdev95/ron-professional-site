@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useBlogs, Blog, Testimonial } from '@/contexts/BlogContext';
+import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -8,7 +9,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
-import { Pencil, Trash2, ExternalLink, LogOut } from 'lucide-react';
+import { Pencil, Trash2, ExternalLink, LogOut, Loader2 } from 'lucide-react';
 
 const AdminDashboard = () => {
   const { 
@@ -20,9 +21,10 @@ const AdminDashboard = () => {
     addTestimonial,
     updateTestimonial,
     deleteTestimonial,
-    isAuthenticated, 
-    logout 
+    loading,
+    error
   } = useBlogs();
+  const { isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
   
@@ -48,29 +50,36 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     if (!isAuthenticated) {
-      navigate('/login');
+      navigate('/admin');
     }
   }, [isAuthenticated, navigate]);
 
   if (!isAuthenticated) return null;
 
   // Blog handlers
-  const handleBlogSubmit = (e: React.FormEvent) => {
+  const handleBlogSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const blogData = {
       ...blogFormData,
       tags: blogFormData.tags.split(',').map(tag => tag.trim()).filter(Boolean),
     };
 
-    if (editingBlogId) {
-      updateBlog(editingBlogId, blogData);
-      toast({ title: 'Blog updated successfully' });
-    } else {
-      addBlog(blogData);
-      toast({ title: 'Blog added successfully' });
+    try {
+      if (editingBlogId) {
+        await updateBlog(editingBlogId, blogData);
+        toast({ title: 'Blog updated successfully' });
+      } else {
+        await addBlog(blogData);
+        toast({ title: 'Blog added successfully' });
+      }
+      resetBlogForm();
+    } catch (error) {
+      toast({ 
+        title: 'Error', 
+        description: 'Failed to save blog post. Please try again.',
+        variant: 'destructive'
+      });
     }
-
-    resetBlogForm();
   };
 
   const handleBlogEdit = (blog: Blog) => {
@@ -85,10 +94,18 @@ const AdminDashboard = () => {
     });
   };
 
-  const handleBlogDelete = (id: string) => {
+  const handleBlogDelete = async (id: string) => {
     if (confirm('Are you sure you want to delete this blog?')) {
-      deleteBlog(id);
-      toast({ title: 'Blog deleted successfully' });
+      try {
+        await deleteBlog(id);
+        toast({ title: 'Blog deleted successfully' });
+      } catch (error) {
+        toast({ 
+          title: 'Error', 
+          description: 'Failed to delete blog post. Please try again.',
+          variant: 'destructive'
+        });
+      }
     }
   };
 
@@ -156,7 +173,7 @@ const AdminDashboard = () => {
 
   const handleLogout = () => {
     logout();
-    navigate('/login');
+    navigate('/admin');
     toast({ title: 'Logged out successfully' });
   };
 
@@ -243,11 +260,18 @@ const AdminDashboard = () => {
                     </div>
 
                     <div className="flex gap-2">
-                      <Button type="submit">
-                        {isEditingBlog ? 'Update Blog' : 'Add Blog'}
+                      <Button type="submit" disabled={loading}>
+                        {loading ? (
+                          <>
+                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                            {isEditingBlog ? 'Updating...' : 'Adding...'}
+                          </>
+                        ) : (
+                          isEditingBlog ? 'Update Blog' : 'Add Blog'
+                        )}
                       </Button>
                       {isEditingBlog && (
-                        <Button type="button" variant="outline" onClick={resetBlogForm}>
+                        <Button type="button" variant="outline" onClick={resetBlogForm} disabled={loading}>
                           Cancel
                         </Button>
                       )}
