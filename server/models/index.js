@@ -341,6 +341,24 @@ export class BlogPostsModel {
 
     static update(id, post) {
         const db = getDatabase();
+        
+        // Get existing post to merge with updates
+        const existing = this.getById(id);
+        if (!existing) {
+            return null;
+        }
+        
+        // Merge existing data with updates, ensuring no undefined values
+        const updatedPost = {
+            title: post.title !== undefined ? post.title : existing.title,
+            slug: post.slug !== undefined ? post.slug : existing.slug,
+            content: post.content !== undefined ? post.content : existing.content,
+            excerpt: post.excerpt !== undefined ? post.excerpt : existing.excerpt,
+            featured_image: post.featured_image !== undefined ? post.featured_image : existing.featured_image,
+            published: post.published !== undefined ? (post.published ? 1 : 0) : existing.published,
+            tags: post.tags !== undefined ? JSON.stringify(post.tags) : existing.tags
+        };
+        
         const stmt = db.prepare(`
             UPDATE blog_posts 
             SET title = ?, slug = ?, content = ?, excerpt = ?, featured_image = ?, 
@@ -350,14 +368,14 @@ export class BlogPostsModel {
         `);
         
         stmt.run(
-            post.title,
-            post.slug,
-            post.content,
-            post.excerpt,
-            post.featured_image,
-            post.published ? 1 : 0,
-            JSON.stringify(post.tags || []),
-            post.published ? 1 : 0,
+            updatedPost.title,
+            updatedPost.slug,
+            updatedPost.content,
+            updatedPost.excerpt,
+            updatedPost.featured_image,
+            updatedPost.published,
+            updatedPost.tags,
+            updatedPost.published,
             id
         );
         

@@ -189,7 +189,11 @@ router.put('/blog-posts/:id', (req, res) => {
         };
         res.json(parsedPost);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        console.error('Blog post update error:', error);
+        res.status(500).json({ 
+            error: error.message,
+            details: 'Failed to update blog post. Check server logs for details.'
+        });
     }
 });
 
