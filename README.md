@@ -2,7 +2,8 @@
 
 A modern, full-stack portfolio website built with React, TypeScript, and Express.js. Features a beautiful responsive design, secure admin panel, and dynamic blog management system.
 
-![Portfolio Preview](https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&auto=format&fit=crop&q=80)
+![Portfolio Preview](/My%20Porfolio%20Site.png)
+
 
 ## ✨ Features
 
