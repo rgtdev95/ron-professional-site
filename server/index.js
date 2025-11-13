@@ -44,7 +44,7 @@ app.use(helmet({
 const corsOptions = {
     origin: NODE_ENV === 'development' 
         ? ['http://localhost:8080', 'http://localhost:3000', 'http://127.0.0.1:8080','http://10.0.0.105:3000']
-        : true,
+        : false, // Disable CORS in production (same-origin deployment)
     credentials: true,
     optionsSuccessStatus: 200
 };

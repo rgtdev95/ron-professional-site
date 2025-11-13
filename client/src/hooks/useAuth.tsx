@@ -50,7 +50,7 @@ interface SetupResponse {
 }
 
 // API Base URL
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+const API_BASE = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '' : 'http://localhost:3000');
 
 // Auth Context
 const AuthContext = createContext<AuthContextType | null>(null);

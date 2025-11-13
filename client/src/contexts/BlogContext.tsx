@@ -36,7 +36,11 @@ const BlogContext = createContext<BlogContextType | undefined>(undefined);
 const TESTIMONIALS_KEY = 'portfolio_testimonials';
 
 // API Base URL - adjust this to match your server
-const API_BASE = 'http://localhost:3000/api';
+const API_BASE = import.meta.env.VITE_API_URL 
+  ? `${import.meta.env.VITE_API_URL}/api`
+  : import.meta.env.PROD 
+    ? '/api' 
+    : 'http://localhost:3000/api';
 
 // API helper function
 const apiCall = async (endpoint: string, options: RequestInit = {}) => {
