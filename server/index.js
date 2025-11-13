@@ -43,7 +43,7 @@ app.use(helmet({
 // CORS configuration
 const corsOptions = {
     origin: NODE_ENV === 'development' 
-        ? ['http://localhost:8080', 'http://localhost:3000', 'http://127.0.0.1:8080']
+        ? ['http://localhost:8080', 'http://localhost:3000', 'http://127.0.0.1:8080','https://10.0.0.105:3000']
         : true,
     credentials: true,
     optionsSuccessStatus: 200
