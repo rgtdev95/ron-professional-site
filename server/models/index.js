@@ -306,7 +306,7 @@ export class BlogPostsModel {
 
     static getPublished() {
         const db = getDatabase();
-        return db.prepare('SELECT * FROM blog_posts WHERE published = 1 ORDER BY published_at DESC').all();
+        return db.prepare('SELECT * FROM blog_posts WHERE published = 1 ORDER BY created_at DESC').all();
     }
 
     static getById(id) {
@@ -362,8 +362,7 @@ export class BlogPostsModel {
         const stmt = db.prepare(`
             UPDATE blog_posts 
             SET title = ?, slug = ?, content = ?, excerpt = ?, featured_image = ?, 
-                published = ?, tags = ?, updated_at = CURRENT_TIMESTAMP,
-                published_at = CASE WHEN ? = 1 AND published = 0 THEN CURRENT_TIMESTAMP ELSE published_at END
+                published = ?, tags = ?, updated_at = CURRENT_TIMESTAMP
             WHERE id = ?
         `);
         
@@ -375,7 +374,6 @@ export class BlogPostsModel {
             updatedPost.featured_image,
             updatedPost.published,
             updatedPost.tags,
-            updatedPost.published,
             id
         );
         
